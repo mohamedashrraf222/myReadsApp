@@ -8,8 +8,31 @@ export default function ShownSearchBooks({ searchTextInputValue }) {
   //
   // this useEffect is to get the data shown in the search page from the api
   useEffect(() => {
-    BooksAPI.search(searchTextInputValue).then((res) => setSearchBooks(res));
+    searchTextInputValue !== "" &&
+      BooksAPI.search(searchTextInputValue).then((res) => setSearchBooks(res));
   }, [searchTextInputValue]);
+
+  //
+  // this function is used to update data
+  function handleChangeShelf(book, shelf) {
+    BooksAPI.update(book, shelf).then((res) => {
+      console.log(res);
+    });
+
+    // for (let i = 0; i < searchBooks.length; i++) {
+    //   searchBooks[i].title === book.title ? removeBook(i) : "don't remove";
+    // }
+  }
+
+  //
+  // this function is used to remove the book from search after adding it to our library
+  //   function removeBook(i){
+  //     setSearchBooks(prev => {
+  //         prev.splice(i , 1)
+  //         console.log(prev);
+  //         return (prev)
+  //     })
+  //   }
 
   function ShownBooksSearch() {
     return (
@@ -34,7 +57,7 @@ export default function ShownSearchBooks({ searchTextInputValue }) {
                     onChange={(e) => {
                       handleChangeShelf(book, e.target.value);
                     }}
-                    defaultValue={book.shelf}
+                    defaultValue="none"
                   >
                     <option value="none" disabled>
                       Move to...
@@ -57,8 +80,8 @@ export default function ShownSearchBooks({ searchTextInputValue }) {
   }
 
   return (
-  <ol className="books-grid">
-    <ShownBooksSearch />
-  </ol>
-  )
+    <ol className="books-grid">
+      <ShownBooksSearch />
+    </ol>
+  );
 }

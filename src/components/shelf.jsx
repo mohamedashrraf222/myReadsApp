@@ -53,6 +53,7 @@ export default function Shelf({ books, shelf, setChanged }) {
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
                     <option value="read">Read</option>
+                    <option value="nonde">REMOVE</option>
                   </select>
                 </div>
               </div>
