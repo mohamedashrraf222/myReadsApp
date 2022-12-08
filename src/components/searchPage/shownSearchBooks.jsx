@@ -7,16 +7,14 @@ export default function ShownSearchBooks({ searchTextInputValue , setAllBooks , 
   //
   // this useEffect is to get the data shown in the search page from the api
   useEffect(() => {
-    searchTextInputValue !== "" &&
-      BooksAPI.search(searchTextInputValue).then((res) => setSearchBooks(res));
+    searchTextInputValue === "" ? setSearchBooks([]) : BooksAPI.search(searchTextInputValue).then((res) => setSearchBooks(res))
   }, [searchTextInputValue]);
 
   //
   // this function is used to update data
   function handleChangeShelf(book, shelf) {
-    BooksAPI.update(book, shelf).then((res) => {
-      console.log(res);
-    });
+    BooksAPI.update(book, shelf)
+    // .then((res) => {console.log(res);});
 
     // for (let i = 0; i < searchBooks.length; i++) {
     //   searchBooks[i].title === book.title ? removeBook(i) : "don't remove";
@@ -33,13 +31,15 @@ export default function ShownSearchBooks({ searchTextInputValue , setAllBooks , 
   //     })
   //   }
 
+  // 
+  // this function is to match the shelfs of books
   function matchBooks(book){
     let myShelf = "none"
     for (let i = 0 ; i < allBooks.length ; i++){
       
       allBooks[i].title == book.title && (myShelf = allBooks[i].shelf) 
     }
-    console.log(myShelf);
+    
     return myShelf
   }
 
@@ -52,7 +52,7 @@ export default function ShownSearchBooks({ searchTextInputValue , setAllBooks , 
       Array.isArray(searchBooks) &&
       searchBooks.map((book) => {
         return (
-          <li key={book.title}>
+          <li key={book.id}>
             <div className="book">
               <div className="book-top">
                 <div
@@ -72,12 +72,13 @@ export default function ShownSearchBooks({ searchTextInputValue , setAllBooks , 
                     }}
                     defaultValue= {matchBooks(book)}
                   >
-                    <option value="none" disabled>
+                    <option value="noValue" disabled>
                       Move to...
                     </option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
                     <option value="read">Read</option>
+                    <option value="none">None</option>
                   </select>
                 </div>
               </div>
