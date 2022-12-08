@@ -2,9 +2,9 @@ import React from "react";
 import ShownSearchBooks from "./shownSearchBooks";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import * as BooksAPI from "../../assets/BooksAPI"
+// import * as BooksAPI from "../../assets/BooksAPI"
 
-export default function SearchPage() {
+export default function SearchPage({setAllBooks , allBooks }) {
   // 
   // this state is to make the input controlled
   const [searchTextInputValue, setSearchTextInputValue] = useState("");
@@ -29,7 +29,7 @@ export default function SearchPage() {
         </div>
       </div>
       <div className="search-books-results">
-        <ShownSearchBooks searchTextInputValue={searchTextInputValue}/>
+        <ShownSearchBooks searchTextInputValue={searchTextInputValue} allBooks={allBooks} setAllBooks={setAllBooks} />
       </div>
     </div>
   );

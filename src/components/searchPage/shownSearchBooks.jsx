@@ -2,9 +2,8 @@ import React from "react";
 import * as BooksAPI from "../../assets/BooksAPI";
 import { useState, useEffect } from "react";
 
-export default function ShownSearchBooks({ searchTextInputValue }) {
+export default function ShownSearchBooks({ searchTextInputValue , setAllBooks , allBooks }) {
   const [searchBooks, setSearchBooks] = useState([]);
-
   //
   // this useEffect is to get the data shown in the search page from the api
   useEffect(() => {
@@ -34,6 +33,20 @@ export default function ShownSearchBooks({ searchTextInputValue }) {
   //     })
   //   }
 
+  function matchBooks(book){
+    let myShelf = "none"
+    for (let i = 0 ; i < allBooks.length ; i++){
+      
+      allBooks[i].title == book.title && (myShelf = allBooks[i].shelf) 
+    }
+    console.log(myShelf);
+    return myShelf
+  }
+
+  useEffect(()=>{
+    BooksAPI.getAll().then((res)=>setAllBooks(res))
+  },[])
+
   function ShownBooksSearch() {
     return (
       Array.isArray(searchBooks) &&
@@ -57,7 +70,7 @@ export default function ShownSearchBooks({ searchTextInputValue }) {
                     onChange={(e) => {
                       handleChangeShelf(book, e.target.value);
                     }}
-                    defaultValue="none"
+                    defaultValue= {matchBooks(book)}
                   >
                     <option value="none" disabled>
                       Move to...

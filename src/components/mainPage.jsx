@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as BooksApI from "../assets/BooksAPI";
 
-export default function MainPage() {
+export default function MainPage({setAllBooks}) {
   //
   // at the fist I am defining some states
 
@@ -19,8 +19,15 @@ export default function MainPage() {
   //
   // this is to get data shown on the main page from the API
   useEffect(() => {
-    BooksApI.getAll().then((res) => setMainPageBooks(res));
+    BooksApI.getAll()
+    .then((res) => {
+      setMainPageBooks(res)
+      return res
+    })
+    .then((res)=>{setAllBooks(res)});
   }, [changed]);
+
+  
 
   return (
     <div className="list-books">
