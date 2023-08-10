@@ -1,6 +1,7 @@
 import React from "react";
 import * as BooksAPI from "../../assets/BooksAPI";
 import { useState, useEffect } from "react";
+import MainPage from "../mainPage";
 
 export default function ShownSearchBooks({ searchTextInputValue , setAllBooks , allBooks }) {
   const [searchBooks, setSearchBooks] = useState([]);
@@ -37,7 +38,7 @@ export default function ShownSearchBooks({ searchTextInputValue , setAllBooks , 
     let myShelf = "none"
     for (let i = 0 ; i < allBooks.length ; i++){
       
-      allBooks[i].title == book.title && (myShelf = allBooks[i].shelf) 
+      allBooks[i].id == book.id && (myShelf = allBooks[i].shelf) 
     }
     
     return myShelf

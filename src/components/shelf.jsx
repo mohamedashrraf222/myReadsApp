@@ -43,6 +43,7 @@ export default function Shelf({ books, shelf, setChanged }) {
                 <div className="book-shelf-changer">
                   <select
                     onChange={(e) => {
+                      console.log(e.target.value);
                       handleChangeShelf(book, e.target.value);
                     }}
                     defaultValue={book.shelf}
@@ -59,7 +60,7 @@ export default function Shelf({ books, shelf, setChanged }) {
               </div>
               <div className="book-title">{book.title}</div>
               <div className="book-authors">
-                {book.authors ? book.authors[0] : ""}
+                {book.authors ? [...book.authors] : ""}
               </div>
             </div>
           </li>

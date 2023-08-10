@@ -17,11 +17,12 @@ function App() {
   //
   // this is to get some info of books 
   // BooksAPI.update(fakeBook[0], "none").then((res) => setConsistent(res));
-
+  
   return (
+
     <Routes className="app">
-      <Route path="/search" element={<SearchPage allBooks={allBooks} setAllBooks={setAllBooks} />} />
-      <Route exact path="/" element={<MainPage setAllBooks={setAllBooks}/>} />
+      <Route path="/myReadsApp/search" element={<SearchPage allBooks={allBooks} setAllBooks={setAllBooks} />} />
+      <Route exact path="/myReadsApp" element={<MainPage setAllBooks={setAllBooks}/>} />
     </Routes>
   );
 }

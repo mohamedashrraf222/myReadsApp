@@ -14,7 +14,7 @@ export default function SearchPage({setAllBooks , allBooks }) {
   return (
     <div className="search-books">
       <div className="search-books-bar">
-        <Link to="/" className="close-search">
+        <Link to="/myReadsApp/" className="close-search">
           Close
         </Link>
         <div className="search-books-input-wrapper">
